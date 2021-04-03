@@ -8,17 +8,23 @@ let timerText = document.getElementById('timer');
 // Working time minutes*seconds
 let sessionDuration = 25*60;
 let timerInterval;
+let timerRunning = false;
 
 // Event listeners
 startBtn.addEventListener('click', function(){
-    timerInterval = setInterval(startTimer, 10);
-})
+    if (!timerRunning){
+        timerInterval = setInterval(startTimer, 10);
+    }
+    timerRunning = true;
+});
 
 stopBtn.addEventListener('click', function(){
+    timerRunning = false;
     clearInterval(timerInterval);
 });
 
 resetBtn.addEventListener("click", function(){
+    timerRunning = false;
     sessionDuration = 25*60;
     if (timerInterval != undefined){
         clearInterval(timerInterval);
